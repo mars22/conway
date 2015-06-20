@@ -14,6 +14,6 @@ defmodule Conway.GameFormatter do
   def format_row(row) when is_tuple(row) do
     row
     |> Tuple.to_list
-    |> Enum.map_join(" " ,fn c -> if c==1, do: "#", else: "_" end)
+    |> Enum.map_join(" " ,fn c -> if c==1, do: "#", else: " " end)
   end
 end

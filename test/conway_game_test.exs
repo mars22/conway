@@ -76,7 +76,7 @@ defmodule ConwayGameTest do
 
     {_,next_game} = Game.next(init_game)
 
-    assert {:ended} = Game.next(next_game)
+    assert {:ended,_} = Game.next(next_game)
 
   end
 

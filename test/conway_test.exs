@@ -19,13 +19,5 @@ defmodule ConwayTest do
 
   end
 
-  test "should show genereted game" do
-    result = capture_io fn ->
-      process(3)
-    end
-
-    assert result
-
-  end
-
+  
 end

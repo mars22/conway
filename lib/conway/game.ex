@@ -12,7 +12,6 @@ defmodule Conway.Game do
 
   def new(size) do
     game_data = generate_game(size, fn(_,_,_) -> :random.uniform(2)-1  end )
-    Logger.info inspect game_data
     %__MODULE__{data: game_data}
   end
 
@@ -42,7 +41,7 @@ defmodule Conway.Game do
   def next(%__MODULE__{ data: prev_data}) do
     next_data = generate_game(size(prev_data),&next_game/3 ,prev_data)
     case prev_data == next_data do
-        true -> {:ended}
+        true -> {:ended, %__MODULE__{data: next_data}}
         false -> {:ok, %__MODULE__{data: next_data}}
     end
 

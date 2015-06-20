@@ -5,7 +5,7 @@ defmodule GameFormatterTest do
 
   test "format single row" do
     result = GF.format_row({0,0,1,0,0})
-    assert result == "_ _ # _ _"
+    assert result == "    #    "
   end
 
   test "format game" do
@@ -19,12 +19,13 @@ defmodule GameFormatterTest do
 
       }}
 
-      formated_game = """
-      _ _ # _ _
-      _ _ # _ _
-      _ _ # _ _
-      _ _ # _ _
-      _ _ # _ _
+      formated_game =
+      """
+          #
+          #
+          #
+          #
+          #
       """
 
       assert GF.format(game) == formated_game
