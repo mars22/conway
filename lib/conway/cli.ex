@@ -4,7 +4,8 @@ defmodule Conway.CLI do
   """
 
   alias Conway.GameFormatter, as: GF
-  alias Conway.GameServer
+  alias Conway.Game
+
   import :timer, only: [sleep: 1]
   require Logger
 
@@ -43,24 +44,19 @@ defmodule Conway.CLI do
   end
 
   def process(game_size) do
-    GameServer.start_link game_size
-    start()
+    Game.new(game_size)
+    |> start
   end
 
-  def start() do
-    case GameServer.next_game() do
-      {:ok, game} -> (
-        IO.puts GF.format(game)
-        sleep 100
-        start()
-      )
-      {:ended, _} -> (
-        IO.puts "KONIEC"
-        GameServer.stop()
-      )
-    end
+  def start({:ok,game}) do
+    IO.puts GF.format(game)
+    
+    start(Game.next(game))
   end
 
+  def start({:ended,_}) do
+    IO.puts "END"
+  end
 
 
 
