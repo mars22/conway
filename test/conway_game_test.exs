@@ -13,13 +13,11 @@ defmodule ConwayGameTest do
   end
 
   test "create  game from  input" do
-    input_game =
-      [[0,0,0],
-      [0,1,0],
-      [0,0,0]]
-    assert {:ok, %Conway.Game{data: {{0,0,0},
-                              {0,1,0},
-                              {0,0,0}}}} == Game.new(input_game)
+    input_game = [size: 3, init: [{1,1},{1,2}]]
+
+    assert {:ok, %Conway.Game{data: { {0,0,0},
+                                      {0,1,1},
+                                      {0,0,0}}}} == Game.new(input_game)
   end
 
   test "get size of game" do
@@ -35,13 +33,13 @@ defmodule ConwayGameTest do
     {{0,0,0},
     {0,1,0},
     {0,0,0}}
-    assert Game.get_cell(1, 1, input_game) == 1
+    assert Game.cell_state(1, 1, input_game) == 1
 
     input1_game =
     {{0,0,0},
     {0,0,1},
     {0,0,0}}
-    assert Game.get_cell(1, 1, input1_game) == 0
+    assert Game.cell_state(1, 1, input1_game) == 0
   end
 
   test "get number of living neighbours cells" do
@@ -64,7 +62,7 @@ defmodule ConwayGameTest do
   end
 
 
-  test "game is ended when there is no living cells" do
+  test "game is ended when prev and next game is the same" do
 
     init_game =%Game
                   {
