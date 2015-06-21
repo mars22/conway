@@ -7,19 +7,19 @@ defmodule ConwayGameTest do
 
 
   test "create 3X3  game" do
-    %Game{data: game} = Game.new(3)
+    {:ok, %Game{data: game}} = Game.new(3)
     assert  is_tuple(game)
     assert  tuple_size(game) == 3
   end
 
-  test "create  game from input" do
+  test "create  game from  input" do
     input_game =
       [[0,0,0],
       [0,1,0],
       [0,0,0]]
-    assert Game.new(input_game) == %Game{data: {{0,0,0},
-                                                {0,1,0},
-                                                {0,0,0}}}
+    assert {:ok, %Conway.Game{data: {{0,0,0},
+                              {0,1,0},
+                              {0,0,0}}}} == Game.new(input_game)
   end
 
   test "get size of game" do

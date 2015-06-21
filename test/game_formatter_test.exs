@@ -5,7 +5,7 @@ defmodule GameFormatterTest do
 
   test "format single row" do
     result = GF.format_row({0,0,1,0,0})
-    assert result == "    #    "
+    assert result == "\s\s\s\s#\s\s\s\s"
   end
 
   test "format game" do
@@ -21,11 +21,11 @@ defmodule GameFormatterTest do
 
       formated_game =
       """
-          #
-          #
-          #
-          #
-          #
+      \s\s\s\s#\s\s\s\s
+      \s\s\s\s#\s\s\s\s
+      \s\s\s\s#\s\s\s\s
+      \s\s\s\s#\s\s\s\s
+      \s\s\s\s#\s\s\s\s
       """
 
       assert GF.format(game) == formated_game

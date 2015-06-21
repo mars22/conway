@@ -7,10 +7,13 @@ defmodule Conway.GameServer do
   # External api
 
 
-  def start_link(game_size) do
-    new_game = Game.new(game_size)
-    GenServer.start_link(__MODULE__, {:ok, new_game}, name: __MODULE__)
 
+  def start_link(game_size) do
+    GenServer.start_link(__MODULE__, game_size, name: __MODULE__)
+  end
+
+  def stop() do
+      GenServer.call(__MODULE__, :stop)
   end
 
   def next_game() do
@@ -21,15 +24,17 @@ defmodule Conway.GameServer do
   ######
   # GenServer implementation
 
+  def init(game_size) do
+    new_game = Game.new(game_size)
+    {:ok, new_game}
+  end
 
-  def handle_call(:next_game, _from, {:ok, game}=current_game) do
+  def handle_call(:next_game, _from, {_, game}=current_game) do
     {:reply, current_game, Game.next(game)}
   end
 
-  def handle_call(:next_game, _from, {:ended, _}=current_game) do
-    {:stop, :normal, :ok, current_game}
-
+  def handle_call(:stop, _from, state) do
+   {:stop, :normal, :ok, state}
   end
 
-  
 end

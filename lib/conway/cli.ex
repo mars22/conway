@@ -2,7 +2,7 @@ defmodule Conway.CLI do
   @moduledoc """
   Handle command line parsing and create new Conaway's Game of Life.
   """
-  
+
   alias Conway.GameFormatter, as: GF
   alias Conway.GameServer
   import :timer, only: [sleep: 1]
@@ -42,6 +42,10 @@ defmodule Conway.CLI do
     System.halt(0)
   end
 
+  def process(game_size) do
+    GameServer.start_link game_size
+    start()
+  end
 
   def start() do
     case GameServer.next_game() do
@@ -50,17 +54,14 @@ defmodule Conway.CLI do
         sleep 100
         start()
       )
-      {:ended, _} -> IO.puts "KONIEC"
+      {:ended, _} -> (
+        IO.puts "KONIEC"
+        GameServer.stop()
+      )
     end
   end
 
-  def process(game_size) do
 
-    game = GameServer.start_link game_size
-
-    start()
-
-  end
 
 
 

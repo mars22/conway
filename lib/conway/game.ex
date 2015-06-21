@@ -3,16 +3,16 @@ defmodule Conway.Game do
   require Logger
 
   defstruct data: nil
-  @type t :: %Conway.Game{data: tuple}
+  @type t :: %__MODULE__{data: tuple}
 
   def new(input_game) when is_list(input_game) do
-    %__MODULE__{data: make_tuples(input_game)}
+    {:ok, %__MODULE__{data: make_tuples(input_game)}}
   end
 
 
   def new(size) do
     game_data = generate_game(size, fn(_,_,_) -> :random.uniform(2)-1  end )
-    %__MODULE__{data: game_data}
+    {:ok, %__MODULE__{data: game_data}}
   end
 
 
