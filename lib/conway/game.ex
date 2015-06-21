@@ -11,6 +11,7 @@ defmodule Conway.Game do
 
 
   def new(size) do
+    :random.seed(:erlang.now)
     game_data = generate_game(size, fn(_,_,_) -> :random.uniform(2)-1  end )
     {:ok, %__MODULE__{data: game_data}}
   end
