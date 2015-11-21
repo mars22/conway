@@ -29,7 +29,10 @@ defmodule Conway.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    [{ :benchwarmer, "~> 0.0.2" }]
+    [
+      { :benchwarmer, "~> 0.0.2" },
+      {:credo, "~> 0.1.9", only: [:dev, :test]}
+    ]
   end
 
   defp escript_config do

@@ -31,7 +31,8 @@ defmodule Conway.CLI do
       {[help: true],_,_}        -> :help
       {[h: true],_,_}           -> :help
       {[size: game_size],_,_}   -> game_size
-      {[size: game_size,init: states],_,_}   -> [size: game_size, init: parse_init_state(states)]
+      {[size: game_size,init: states],_,_}   ->
+        [size: game_size, init: parse_init_state(states)]
       {_,_,_}                   -> @default_game_size
     end
   end

@@ -5,24 +5,26 @@ defmodule Conway.Game do
   defstruct data: nil
   @type t :: %__MODULE__{data: tuple}
 
-  def new([size: size, init: init_state]) when is_list(init_state) do
+  def new([game_size: game_size, init: init_state]) when is_list(init_state) do
 
-    game_data = generate_game(size, &set_cell_form_init_state/3,init_state )
+    game_data = generate_game(game_size, &set_cell_form_init_state/3,init_state)
 
     {:ok, %__MODULE__{data: game_data}}
   end
 
 
-  def new(size) do
+  def new(game_size) do
     :random.seed(:erlang.now)
-    game_data = generate_game(size, fn(_,_,_) -> :random.uniform(2)-1  end )
+    game_data = generate_game(
+      game_size, fn(_,_,_) -> :random.uniform(2)-1  end
+    )
     {:ok, %__MODULE__{data: game_data}}
   end
 
 
-  defp generate_game(size, make_cell, prev_game \\ nil) do
-    for r <- 0..size-1 do
-      for c <- 0..size-1 do
+  defp generate_game(game_size, make_cell, prev_game \\ nil) do
+    for r <- 0..game_size-1 do
+      for c <- 0..game_size-1 do
         make_cell.(r,c,prev_game)
       end
     end

@@ -13,7 +13,7 @@ defmodule ConwayGameTest do
   end
 
   test "create  game from  input" do
-    input_game = [size: 3, init: [{1,1},{1,2}]]
+    input_game = [game_size: 3, init: [{1,1},{1,2}]]
 
     assert {:ok, %Conway.Game{data: { {0,0,0},
                                       {0,1,1},
