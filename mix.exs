@@ -5,7 +5,7 @@ defmodule Conway.Mixfile do
     [app: :conway,
      mod: {Conway.CLI,[]},
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.1",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      escript: escript_config,
